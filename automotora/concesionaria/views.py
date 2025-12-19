@@ -15,7 +15,7 @@ def alta_automotora(request):
         if form.is_valid():
             form.save()
             messages.success(request, '¡Sede de Automotora registrada con éxito!')
-            form = AutomotoraForm() # Limpia el formulario
+            form = AutomotoraForm()
     return render(request, 'concesionaria/alta_automotora.html', {'form': form})
 
 
