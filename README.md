@@ -39,33 +39,33 @@ Sigue estas instrucciones para replicar el entorno de desarrollo en tu computado
 Descarga el código fuente en tu máquina local:
 git clone https://github.com/mauroatp/TuPrimeraPagina-deSoza.git
 
-###2. Configuración del Entorno Virtual
+### 2. Configuración del Entorno Virtual
 
 Crea el entorno para aislar las librerías:
 python -m venv env
 
-###3. Activación del Entorno
+### 3. Activación del Entorno
 
 env\Scripts\activate
 Sabrás que está activo porque aparecerá (env) al principio de la línea en tu terminal.
 
-###4. Instalación de Django
+### 4. Instalación de Django
 
 pip install django
 
-###5. Preparación de la Base de Datos
+### 5. Preparación de la Base de Datos
 
 Genera los archivos necesarios para guardar la información localmente:
 python manage.py makemigrations
 python manage.py migrate
 
-##6. Creación de la cuenta de Administrador
+### 6. Creación de la cuenta de Administrador
 
 Crea un usuario para acceder al panel /admin:
 python manage.py createsuperuser
 Escribe el nombre de usuario, correo y contraseña (los caracteres no se verán mientras escribes por seguridad).
 
-###7. Ejecución del Sistema
+### 7. Ejecución del Sistema
 
 Inicia el servidor local:
 python manage.py runserver
