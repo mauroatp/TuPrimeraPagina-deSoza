@@ -1,0 +1,23 @@
+{% extends "concesionaria/index.html" %}
+
+{% block contenido %}
+<div class="row justify-content-center py-5">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-primary text-white py-3 text-center">
+                <h4 class="mb-0 fw-bold">{% if editando %}Editar Sede{% else %}Nueva Automotora{% endif %}</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary fw-bold">Guardar</button>
+                        <a href="{% url 'buscar_automotora' %}" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

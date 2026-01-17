@@ -1,5 +1,5 @@
 from django.db import models
-
+from vendedores.models import Vendedor
 
 class Automotora(models.Model):
     nombre = models.CharField(max_length=100)
@@ -9,13 +9,7 @@ class Automotora(models.Model):
     def __str__(self):
         return self.nombre
 
-class Vendedor(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    documento = models.IntegerField()
 
-    def __str__(self):
-        return f"{self.nombre} {self.apellido}"
 
 class Auto(models.Model):
     modelo = models.CharField(max_length=50)

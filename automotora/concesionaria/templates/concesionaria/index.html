@@ -53,40 +53,86 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand text-primary" href="{% url 'index' %}">
-                <i class="bi bi-house-door-fill"></i> AUTOMOTORA
-            </a>
+    <div class="container">
+        <a class="navbar-brand text-primary" href="{% url 'index' %}">
+            <i class="bi bi-house-door-fill"></i> AUTOMOTORA
+        </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                   
-                    
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                
+                {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Altas
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Automotoras</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="{% url 'alta_automotora' %}">Nueva Automotora</a></li>
-                            <li><a class="dropdown-item" href="{% url 'alta_vendedor' %}">Nuevo Vendedor</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'alta_auto' %}">Nuevo Vehículo</a></li>
+                            <li><a class="dropdown-item" href="{% url 'buscar_automotora' %}">Listar / Buscar</a></li>
                         </ul>
                     </li>
 
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-outline-primary" href="{% url 'buscar_automotora' %}">
-                            <i class="bi bi-search"></i> Buscar
-                        </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Vehículos</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="{% url 'alta_auto' %}">Nuevo Vehículo</a></li>
+                            <li><a class="dropdown-item" href="{% url 'lista_autos' %}">Ver Catálogo</a></li>
+                        </ul>
                     </li>
-                </ul>
-            </div>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Vendedores</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="{% url 'vendedores:alta_vendedor' %}">Nuevo Vendedor</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vendedores:lista' %}">Lista de Personal</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">Sobre Mí</a>
+                </li>
+
+                    <li class="nav-item dropdown ms-lg-4">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center text-info" href="#" data-bs-toggle="dropdown">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}" width="30" height="30" class="rounded-circle me-2" style="object-fit: cover;">
+                            {% endif %}
+                            {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{% url 'perfil_detail' %}"><i class="bi bi-person-circle me-2"></i>Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profile_change' %}"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">Sobre Mí</a>
+                </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-primary btn-sm" href="{% url 'signup' %}">Registrarse</a>
+                    </li>
+                {% endif %}
+                
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main class="container main-container">
         <div class="row justify-content-center">
@@ -132,7 +178,7 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-md-6 text-md-start">
-                    <p class="mb-0">&copy; 2025 Automotora Pro - Sistema de Gestión.</p>
+                    <p class="mb-0">&copy; 2026 Automotora Pro - Sistema de Gestión.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <small>Desarrollado con Python & Django</small>

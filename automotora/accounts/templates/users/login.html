@@ -1,0 +1,20 @@
+{% extends "concesionaria/index.html" %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card shadow border-0 rounded-4">
+            <div class="card-body p-4">
+                <h3 class="text-center fw-bold mb-4">Iniciar Sesión</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary fw-bold">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

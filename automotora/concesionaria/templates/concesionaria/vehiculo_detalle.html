@@ -1,0 +1,34 @@
+{% extends "concesionaria/index.html" %}
+
+{% block contenido %}
+<div class="container py-5">
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="row g-0">
+            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center">
+                {% if vehiculo.imagen %}
+                    <img src="{{ vehiculo.imagen.url }}" class="img-fluid" alt="{{ vehiculo.modelo }}">
+                {% else %}
+                    <i class="bi bi-car-front display-1 text-secondary"></i>
+                {% endif %}
+            </div>
+            <div class="col-md-6 p-5">
+                <h1 class="fw-bold">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h1>
+                <h3 class="text-primary mb-4">${{ vehiculo.precio }}</h3>
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item"><strong>Año:</strong> {{ vehiculo.anio }}</li>
+                    <li class="list-group-item"><strong>Kilómetros:</strong> {{ vehiculo.kilometros }}</li>
+                    <li class="list-group-item"><strong>Descripción:</strong> {{ vehiculo.descripcion }}</li>
+                </ul>
+
+                {% if user.is_authenticated %}
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'vehiculo_editar' vehiculo.pk %}" class="btn btn-warning px-4 fw-bold">Editar</a>
+                        <a href="{% url 'vehiculo_eliminar' vehiculo.pk %}" class="btn btn-danger px-4 fw-bold">Eliminar</a>
+                    </div>
+                {% endif %}
+                <a href="{% url 'lista_autos' %}" class="btn btn-link mt-3 text-decoration-none p-0">Volver al catálogo</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

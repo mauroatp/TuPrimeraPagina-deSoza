@@ -9,7 +9,7 @@ class AutomotoraForm(forms.ModelForm):
 class VendedorForm(forms.ModelForm):
     class Meta:
         model = Vendedor
-        fields = ['nombre', 'apellido', 'documento']
+        fields = ['nombre', 'apellido', 'email', 'dni']
 
 class AutoForm(forms.ModelForm):
     class Meta:

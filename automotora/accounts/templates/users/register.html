@@ -1,0 +1,84 @@
+{% extends "concesionaria/index.html" %}
+
+{% block contenido %}
+<div class="row justify-content-center py-5">
+    <div class="col-lg-8 col-xl-7">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-gradient bg-primary text-white py-4 text-center rounded-top-4">
+                <i class="bi bi-person-badge display-4"></i>
+                <h2 class="fw-bold mt-2">Únete a la Red</h2>
+                <p class="mb-0 opacity-75">Crea tu perfil de usuario para gestionar el inventario</p>
+            </div>
+            
+            <div class="card-body p-4 p-md-5">
+                <form method="POST" enctype="multipart/form-data" class="needs-validation">
+                    {% csrf_token %}
+                    
+                    <h5 class="text-primary border-bottom pb-2 mb-4"><i class="bi bi-shield-lock me-2"></i>Credenciales de Acceso</h5>
+                    
+                    <div class="row g-3">
+                        {% for field in form %}
+                            {% if field.name == "username" or "password" in field.name %}
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">{{ field.label }}</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="bi bi-key"></i></span>
+                                        {{ field }}
+                                    </div>
+                                    {% if field.help_text %}
+                                        <div class="form-text small">{{ field.help_text|safe }}</div>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">{{ field.label }}</label>
+                                    {{ field }}
+                                </div>
+                            {% endif %}
+
+                            {% if field.errors %}
+                                <div class="col-12 text-danger small">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-5 d-grid gap-3">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold rounded-pill py-3 shadow-sm">
+                            <i class="bi bi-check-circle me-2"></i>Finalizar Registro
+                        </button>
+                        <a href="{% url 'login' %}" class="btn btn-link text-decoration-none text-muted">
+                            ¿Ya tienes cuenta? Inicia sesión aquí
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilizamos los inputs para que no se vean como el default de Django */
+    input, select {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    input:focus {
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+</style>
+{% endblock %}

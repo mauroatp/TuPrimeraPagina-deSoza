@@ -1,0 +1,22 @@
+{% extends "concesionaria/index.html" %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="card shadow border-0 rounded-4 p-4">
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" class="rounded-circle mx-auto d-block mb-3" width="150" height="150" style="object-fit: cover;">
+            {% endif %}
+            <h2 class="fw-bold">{{ user.username }}</h2>
+            <hr>
+            <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>País:</strong> {{ user.pais }}</p>
+            <p><strong>Dirección:</strong> {{ user.direccion }}</p>
+            <div class="mt-4">
+                <a href="{% url 'profile_change' %}" class="btn btn-warning fw-bold">Editar Perfil</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
